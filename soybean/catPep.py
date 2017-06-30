@@ -2,6 +2,7 @@
 #coding=utf-8
 
 import os
+from os import path
 import sys
 
 # 使用脚本 ./split file outFile
