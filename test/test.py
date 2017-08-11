@@ -1,11 +1,12 @@
 #!/usr/bin/python3.4
-# coding=utf-8
+# -*- coding:utf-8 -*-
 ''' test'''
-class test():
-    def __init__(self):
-        self.name="yuanwj"
+from urllib import request
 
-    @property
-    def desc(self):
-        print(self.name)
-yuanwj=test()
+
+def server():
+    lines = request.urlopen("http://python.jobbole.com/81478/")
+    for line in lines:
+        print(line.decode("utf-8"))
+
+server()

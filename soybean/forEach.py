@@ -6,3 +6,5 @@ for fileName in file:
 	print("当前文件为"+fileName+".fa")
 	# os.system("./split.py "+fileName)
 	# os.system("./catPep.py "+fileName)
+	
+

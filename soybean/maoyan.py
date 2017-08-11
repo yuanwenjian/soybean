@@ -7,9 +7,10 @@ import pymysql
 from bs4 import BeautifulSoup
 
 
-# class Movie():
-#     def __init__(self,name,cat,dir,dra,nm,sc,snum,start,):
-#
+class Movie():
+    def __init__(self,data):
+        print(data)
+        self.__dict__=data
 def collectIds(url):
     spon = requests.get(url)
     html = BeautifulSoup(spon.content)
@@ -31,27 +32,16 @@ def collectIds(url):
         response = requests.get("http://m.maoyan.com/movie/" + id + ".json", headers=head)
         result = response.json()
         jsonMovie = result["data"]['MovieDetailModel']
-        cat = jsonMovie["cat"]
-        dir = jsonMovie['dir']
-        dra = jsonMovie['dra']
-        img = jsonMovie['img']
-        name = jsonMovie['nm']
-        score = jsonMovie['sc']
-        snum = jsonMovie['snum']
-        star = jsonMovie['star']
-
-        resultStr = name + "\t" + cat + "\t" + dir + "\t" + img + "\t" + str(score) + "\t" + str(
-            snum) + "\t" + star + "\t" + dra + "\n"
-        with open("/home/bmk/PycharmProjects/soybean/soybean/html/movie.csv", "a") as  aa:
-            aa.write(resultStr)
+        movieObj=movie(jsonMovie)
+        insertMysql(movieObj)
     print("当前一页写入完成")
 
 
 def insertMysql(movie):
-    db = pymysql.connect(host="localhost", port="3306", user="root", psswd="", db="splider")
-    db.set_charset("utf-8")
+    db = pymysql.connect(host="localhost", port=3306, user="root", passwd="", db="splider")
+    db.set_charset("utf8")
     curosr = db.cursor()
-    sql="insert into t_movie (name,cat,dir,dra,img,name,score,snum,star) VALUES (movie.name)"
+    sql="insert into t_movie (name,cat,dir,dra,img,score,snum,star) VALUES (movie.nm,movie.cat,movie.dir,movie.dra,movie.img,movie.sc,movie.snum,movie.start)"
 
 
 if __name__ == '__main__':
