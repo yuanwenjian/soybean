@@ -20,3 +20,4 @@ while 1:
 		name=currentLine+"\t"+str(count)+"\t"+str(count+len(line))+"\t"+sys.argv[1]+"\n"
 		count=count+len(line)
 		fileWrite.write(name)
+		print("========test==============")
