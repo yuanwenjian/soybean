@@ -20,3 +20,4 @@ while 1:
 		newLine=line
 	else:
 		newLine=newLine+line.strip()
+		print("添加master 分支=================test")
